@@ -1,0 +1,39 @@
+.tasks-page {
+  background-color: #ffffff;
+  padding: 50px 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.tasks-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #333333;
+}
+
+.tasks-page p {
+  font-size: 1.2rem;
+  color: #666666;
+  margin-bottom: 30px;
+}
+
+.tasks-list .list-group-item {
+  font-size: 1rem;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tasks-list .badge {
+  font-size: 0.9rem;
+  padding: 5px 10px;
+}
+
+.tasks-page .btn-primary {
+  padding: 10px 30px;
+  font-size: 1.1rem;
+}

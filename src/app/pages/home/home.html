@@ -1,0 +1,17 @@
+<div class="home text-center">
+  <h1>Bienvenue dans mon projet Angular !</h1>
+  <p class="lead">Ce projet Angular a pour but d'enregistrer vos tâches quotidiennes et de les gérer facilement.</p>
+  <a class="btn btn-primary" href="tasks">Voir mes tâches</a>
+
+  <div class="tasks mt-4" *ngIf="tasks.length > 0">
+    <h3>Mes tâches :</h3>
+    <ul class="list-group">
+      <li *ngFor="let task of tasks" class="list-group-item d-flex justify-content-between align-items-center">
+        {{ task.name }}
+        <span class="badge rounded-pill" [ngClass]="getBadgeClass(task.status)">
+          {{ task.status }}
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>
