@@ -1,0 +1,90 @@
+<div class="profile-page" [ngClass]="currentUser?.theme">
+  <h1 class="text-center mb-4">Profil Utilisateur</h1>
+
+  <!-- Section Sélection / Création -->
+  <div class="row mb-4">
+    <!-- Sélection utilisateur -->
+    <div class="col-md-6">
+      <div class="card p-3 mb-4">
+        <h3 class="card-title">Sélectionner un profil</h3>
+        <select [(ngModel)]="selectedUserId" (ngModelChange)="selectUser($event)" class="form-select mb-2">
+          <option *ngFor="let u of users" [value]="u.id">
+            {{ u.pseudo }} ({{ u.email }})
+          </option>
+        </select>
+        <button class="btn btn-danger w-100" *ngIf="currentUser" (click)="deleteUser(currentUser.id)">
+          Supprimer le profil
+        </button>
+      </div>
+    </div>
+
+    <!-- Création utilisateur -->
+    <div class="col-md-6">
+      <div class="card p-3 mb-4">
+        <h3 class="card-title">Créer un nouveau profil</h3>
+        <input type="text" placeholder="Nom" #nom class="form-control mb-2">
+        <input type="text" placeholder="Prénom" #prenom class="form-control mb-2">
+        <input type="text" placeholder="Pseudo" #pseudo class="form-control mb-2">
+        <input type="email" placeholder="Email" #email class="form-control mb-2">
+        <button class="btn btn-primary w-100" (click)="createUser(nom.value, prenom.value, pseudo.value, email.value)">
+          Créer un profil
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Profil -->
+  <div *ngIf="editableUser" class="card p-4">
+    <!-- Avatar -->
+    <div class="text-center mb-3">
+      <img [src]="editableUser.avatar || 'assets/default-avatar.png'" alt="Avatar" class="avatar-img">
+      <input type="file" (change)="onAvatarSelected($event)" class="form-control mt-2">
+    </div>
+
+    <!-- Infos utilisateur -->
+    <h2 class="text-center">{{ editableUser.pseudo }}</h2>
+    <p class="text-center text-muted">{{ editableUser.nom }} {{ editableUser.prenom }}</p>
+    <p>Email: <strong>{{ editableUser.email }}</strong></p>
+    <p>Date d'inscription: {{ editableUser.dateInscription | date:'longDate' }}</p>
+
+    <!-- Boutons -->
+    <div class="mb-3">
+      <button class="btn btn-secondary me-2" (click)="toggleTheme()">
+        Passer en {{ editableUser.theme === 'dark' ? 'clair' : 'sombre' }}
+      </button>
+      <button class="btn btn-success" (click)="applyChanges()">Enregistrer les modifications</button>
+    </div>
+
+    <!-- Tâches -->
+    <div class="tasks mt-4">
+      <h3>Gestion des tâches</h3>
+      <div class="mb-2">
+        <button class="btn btn-sm btn-outline-primary me-2" (click)="sortTasksByName()">Trier par nom</button>
+        <button class="btn btn-sm btn-outline-primary" (click)="sortTasksByStatus()">Trier par statut</button>
+      </div>
+
+      <ul class="list-group mb-3">
+        <li *ngFor="let t of editableUser.taches; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+          {{ t.name }}
+          <div>
+            <span class="badge rounded-pill" [ngClass]="getBadgeClass(t.status)" (click)="changeTaskStatus(i)">
+              {{ t.status }}
+            </span>
+            <button class="btn btn-sm btn-danger ms-2" (click)="removeTask(i)">Supprimer</button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Ajouter une tâche -->
+      <div class="add-task d-flex">
+        <input type="text" [(ngModel)]="newTaskName" class="form-control me-2" placeholder="Nouvelle tâche">
+        <select [(ngModel)]="newTaskStatus" class="form-select me-2">
+          <option value="En cours">En cours</option>
+          <option value="Terminée">Terminée</option>
+          <option value="Urgente">Urgente</option>
+        </select>
+        <button class="btn btn-primary" (click)="addTask()">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>

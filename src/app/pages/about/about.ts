@@ -1,11 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ThemeService } from '../services/theme.service';
 
 @Component({
   selector: 'app-about',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './about.html',
-  styleUrl: './about.css'
+  styleUrls: ['./about.css']
 })
-export class About {
+export class AboutComponent implements OnInit {
+  themeClass: 'light' | 'dark' = 'light';
 
+  constructor(private themeService: ThemeService) {}
+
+  ngOnInit() {
+    // s'abonner aux changements de thème
+    this.themeService.getTheme().subscribe(theme => {
+      this.themeClass = theme;
+    });
+  }
 }

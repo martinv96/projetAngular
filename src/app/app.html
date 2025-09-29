@@ -1,22 +1,61 @@
-  <link rel="stylesheet" href="app.css">
-  <!-- Bootstrap CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="app.css">
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="">Mini To-Do App</a>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="">Accueil</a></li>
-        <li class="nav-item"><a class="nav-link" href="tasks">Tâches</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+<body>
+  <!-- On applique le thème sur page-wrapper -->
+  <div class="page-wrapper" [ngClass]="currentUser?.theme === 'dark' ? 'dark-theme' : 'light-theme'">
 
-  <script src="home.js"></script>
-  <script src="tasks.js"></script>
+    <!-- Navbar (reste fixe sombre) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container d-flex align-items-center">
 
-<div class="container mt-4">
-  <router-outlet></router-outlet>
-</div>
+        <!-- Avatar + pseudo -->
+        <div class="d-flex align-items-center me-3">
+          <img *ngIf="currentUser" [src]="currentUser!.avatar || 'assets/default-avatar.png'" 
+               alt="Avatar" class="rounded-circle me-2" width="32" height="32">
+          <span *ngIf="currentUser" class="text-light">{{ currentUser!.pseudo }}</span>
+        </div>
 
+        <!-- Logo -->
+        <a class="navbar-brand ms-2" href="">Mini To-Do App</a>
+
+        <!-- Bouton burger -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Liens de navigation -->
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link" href="">Accueil</a></li>
+            <li class="nav-item"><a class="nav-link" href="tasks">Tâches</a></li>
+            <li class="nav-item"><a class="nav-link" href="contact">Contact</a></li>
+            <li class="nav-item"><a class="nav-link" href="about">À propos</a></li>
+            <li class="nav-item"><a class="nav-link" href="profile">Mon profil</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Contenu -->
+    <main class="container mt-4 flex-grow-1">
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer bg-dark text-light text-center py-3">
+      <div class="container">
+        <p class="mb-1">&copy; Septembre 2025 Mon projet Angular - Tous droits réservés</p>
+        <small>Développé avec Angular & Bootstrap</small>
+      </div>
+    </footer>
+
+  </div>
+</body>
+
+<script src="home.js"></script>
+<script src="tasks.js"></script>

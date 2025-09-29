@@ -1,17 +1,59 @@
-<div class="home text-center">
-  <h1>Bienvenue dans mon projet Angular !</h1>
-  <p class="lead">Ce projet Angular a pour but d'enregistrer vos tâches quotidiennes et de les gérer facilement.</p>
-  <a class="btn btn-primary" href="tasks">Voir mes tâches</a>
+<div class="home text-center" [ngClass]="currentTheme">
+    <h1>Bienvenue dans mon projet Angular !</h1>
+    <p class="lead">Ce projet Angular a pour but d'enregistrer vos tâches quotidiennes et de les gérer facilement.</p>
+    <a class="btn btn-primary" href="tasks">Voir mes tâches</a>
 
-  <div class="tasks mt-4" *ngIf="tasks.length > 0">
-    <h3>Mes tâches :</h3>
-    <ul class="list-group">
-      <li *ngFor="let task of tasks" class="list-group-item d-flex justify-content-between align-items-center">
-        {{ task.name }}
-        <span class="badge rounded-pill" [ngClass]="getBadgeClass(task.status)">
-          {{ task.status }}
-        </span>
-      </li>
-    </ul>
-  </div>
+    <div class="tasks mt-4" *ngIf="tasks.length > 0">
+        <h3>Mes tâches :</h3>
+        <ul class="list-group">
+            <li *ngFor="let task of tasks" class="list-group-item d-flex justify-content-between align-items-center">
+                {{ task.name }}
+                <span class="badge rounded-pill" [ngClass]="getBadgeClass(task.status)">
+                    {{ task.status }}
+                </span>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Calendrier -->
+    <div class="calendar-container mt-5">
+        <div class="calendar-header d-flex align-items-center justify-content-between mb-3">
+            <div class="btn-group">
+                <button class="btn btn-outline-secondary" (click)="goPrevMonth()">&laquo;</button>
+                <button class="btn btn-outline-secondary" (click)="goToday()">Aujourd'hui</button>
+                <button class="btn btn-outline-secondary" (click)="goNextMonth()">&raquo;</button>
+            </div>
+
+            <!-- Liste déroulante pour l'année et affichage du mois -->
+            <div class="calendar-title" style="position: relative; display: inline-block;">
+                <button class="btn btn-outline-secondary" (click)="showYearDropdown = !showYearDropdown">
+                    {{ current | date:'MMMM yyyy' }} ▼
+                </button>
+                <ul *ngIf="showYearDropdown" class="year-dropdown list-group position-absolute">
+                    <li *ngFor="let y of years" class="list-group-item list-group-item-action"
+                        (click)="changeYear(y); showYearDropdown = false">
+                        {{ y }}
+                    </li>
+                </ul>
+            </div>
+
+            <div style="width: 150px;"></div> <!-- placeholder pour équilibrer flex -->
+        </div>
+
+        <div class="calendar-grid">
+            <!-- entete jour de la semaine -->
+            <div class="weekday" *ngFor="let wd of weekdays">{{ wd }}</div>
+
+            <!-- semaine / jour -->
+            <ng-container *ngFor="let week of weeks">
+                <ng-container *ngFor="let day of week">
+                    <div class="day-cell" [class.other-month]="!day.inCurrentMonth" [class.today]="day.isToday"
+                        [class.selected]="selectedDate && (isoDate(selectedDate) === isoDate(day.date))"
+                        (click)="selectDate(day)" title="{{ isoDate(day.date) }}">
+                        <div class="day-number">{{ day.label }}</div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
 </div>

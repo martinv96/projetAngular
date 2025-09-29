@@ -1,0 +1,72 @@
+/* Styles généraux */
+.profile-page {
+  padding: 20px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- Thème clair (light) --- */
+.light {
+  background-color: #f8f9fa; /* gris clair */
+  color: #212529; /* texte sombre */
+}
+
+.light .card {
+  background-color: #ffffff; /* cartes blanches */
+  color: #212529;
+}
+
+.light .btn-secondary {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.light .btn-primary {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+/* --- Thème sombre (dark) --- */
+.dark {
+  background-color: #121212; /* gris très foncé */
+  color: #e0e0e0; /* texte clair */
+}
+
+.dark .card {
+  background-color: #1e1e1e; /* cartes sombre */
+  color: #e0e0e0;
+}
+
+.dark .btn-secondary {
+  background-color: #495057;
+  color: #fff;
+}
+
+.dark .btn-primary {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+/* Avatar */
+.avatar-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Badges */
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}

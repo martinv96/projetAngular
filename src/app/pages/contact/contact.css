@@ -1,28 +1,82 @@
-.contact {
-  background-color: #ffffff;
+/* Base contact form */
+.contact-page {
+  font-family: 'Poppins', sans-serif;
   padding: 50px 20px;
   border-radius: 10px;
-  box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
   max-width: 600px;
   margin: 0 auto;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.contact h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+/* Thème clair */
+.contact-page.light {
+  background-color: #ffffff;
   color: #333333;
 }
 
-.contact p {
+.contact-page.light .contact-form {
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact-page.light .form-control {
+  background-color: #fff;
+  color: #333;
+  border-color: #ccc;
+}
+
+.contact-page.light .form-label {
+  color: #333;
+}
+
+.contact-page.light .btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+
+/* Thème sombre */
+.contact-page.dark {
+  background-color: #121212;
+  color: #fff;
+}
+
+.contact-page.dark .contact-form {
+  background-color: #2c2c2c; /* gris foncé pour le formulaire */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.contact-page.dark .form-control {
+  background-color: #3a3a3a; /* gris moyen pour input */
+  color: #fff;
+  border-color: #555;
+}
+
+.contact-page.dark .form-label {
+  color: #fff;
+}
+
+.contact-page.dark .btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+
+/* Titres et textes */
+.contact-page h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.contact-page p {
   font-size: 1.2rem;
-  color: #666666;
   margin-bottom: 30px;
+  font-weight: 400;
 }
 
-.contact-form .form-label {
-  font-weight: 500;
-}
-
+/* Formulaire et boutons */
 .contact-form .form-control {
   border-radius: 8px;
 }
@@ -31,4 +85,5 @@
   padding: 10px 30px;
   font-size: 1.1rem;
   margin-top: 10px;
+  transition: background-color 0.3s, color 0.3s;
 }
